@@ -4,7 +4,6 @@ import random
 
 
 class Philosopher(threading.Thread):
-
     def __init__(self, name, leftFork, rightFork):
         print("{} сів за стіл".format(name))
         threading.Thread.__init__(self, name=name)
