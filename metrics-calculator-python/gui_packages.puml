@@ -1,0 +1,11 @@
+@startuml packages
+set namespaceSeparator none
+package "app.gui" as app.gui {
+    package "app.gui.calculationsWindow" as app.gui.calculationsWindow { }
+    package "app.gui.mainWindow" as app.gui.mainWindow { }
+    package "app.gui.metricsManualWindow" as app.gui.metricsManualWindow { }
+}
+app.gui.calculationsWindow --> app.gui.metricsManualWindow
+app.gui.mainWindow --> app.gui.calculationsWindow
+app.gui.mainWindow --> app.gui.metricsManualWindow
+@enduml

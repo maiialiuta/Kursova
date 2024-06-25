@@ -1,0 +1,35 @@
+@startuml SequenceDiagram
+    skinparam sequenceParticipant underline
+
+    actor "Розробник" as dev
+
+    dev -> ":Основне вікно" as main: Відкрити теку проєкта
+    activate main
+    main -> ":Таблиця метрик" as table: Обчислити метрики
+    alt "Успішний вибір"
+
+
+        activate table
+
+            table --> dev: Переглянути результати обчислень
+
+            dev -> ":Excel-звіт" as excel: Сформувати звіт
+            activate excel
+            excel --> table: Повернутись до таблиці метрик
+            deactivate excel
+            table --> dev: Відкрити сформований файл звіту
+
+            dev -> ":Довідка" as help: Уточнити показники в довідці
+            activate help
+            help --> table: Повернутись до таблиці метрик
+            deactivate help
+
+            table --> dev: Відобразити уточнені показники
+
+            deactivate table
+
+
+    else "Не вдалось обрати теку"
+        main --> dev: Повернути статус вибору проєкта
+    end
+@enduml

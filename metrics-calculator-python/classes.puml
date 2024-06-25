@@ -1,0 +1,248 @@
+@startuml classes
+set namespaceSeparator none
+class "app.gui.calculationsWindow.Ui_metricsWindow" as app.gui.calculationsWindow.Ui_metricsWindow {
+  backMainBtn
+  classes : int
+  exportExcelBtn
+  helpBtn_2
+  mainWindow
+  manualWindow
+  metricsTbl
+  nocLbl
+  projectNameLbl_2
+  project_obj
+  ui
+  window
+  backToMain()
+  exportToExcel()
+  openManual()
+  retranslateUi(metricsWindow)
+  setupUi(metricsWindow, project_obj, mainWindow)
+}
+class "app.gui.mainWindow.Ui_MainWindow" as app.gui.mainWindow.Ui_MainWindow {
+  calculateBtn
+  calculationsWindow
+  centralwidget
+  file_name : str
+  helpBtn
+  label
+  manualWindow
+  nameLbl
+  openFolderButton
+  pythonProjectLbl
+  selectProjectLbl
+  selectedProjectLbl
+  statusbar
+  ui
+  window
+  calcMetrics()
+  openFiles()
+  openManual()
+  retranslateUi(MainWindow)
+  setupUi(MainWindow)
+}
+class "app.gui.metricsManualWindow.Ui_Dialog" as app.gui.metricsManualWindow.Ui_Dialog {
+  ...
+  previousWindow
+  pushButton
+  window
+  backToWindow()
+  retranslateUi(Dialog)
+  setupUi(Dialog, previousWindow)
+}
+class "app.src.entities.class_entity.Class" as app.src.entities.class_entity.Class {
+  class_ast_node
+  class_name : str
+  cohesion_category_metrics
+  complexity_category_metrics
+  coupling_category_metrics
+  fields : set
+  hierarchy : int
+  methods : dict
+  python_file_obj
+  qmood_category_metrics
+  size_category_metrics
+  add_field(field)
+  add_method(method_name, params)
+  get_class_ast_node()
+  get_class_name()
+  get_cohesion_category_metrics()
+  get_complexity_category_metrics()
+  get_coupling_category_metrics()
+  get_fields()
+  get_hierarchy()
+  get_methods()
+  get_python_file_obj()
+  get_qmood_category_metrics()
+  get_size_category_metrics()
+  set_hierarchy(value)
+}
+class "app.src.entities.python_file.PythonFile" as app.src.entities.python_file.PythonFile {
+  classes : list
+  file_full_path
+  file_name
+  generated_ast
+  project_obj
+  add_class(class_obj)
+  get_file_classes()
+  get_file_full_path()
+  get_file_name()
+  get_generated_ast()
+  get_project_obj()
+}
+class "app.src.entities.the_project.Project" as app.src.entities.the_project.Project {
+  project_name
+  python_files : list
+  root_folder_path
+  add_python_file(python_file_obj)
+  get_files()
+  get_project_name()
+  get_root_folder_path()
+}
+class "app.src.generator.generate_ast.AstGenerator" as app.src.generator.generate_ast.AstGenerator {
+  project_obj
+  create_ast(python_file_str, file_name, full_file_path)
+  read_root_project_folder()
+  start_parsing()
+}
+class "app.src.metrics.calculator.metrics_calculator.MetricsCalculator" as app.src.metrics.calculator.metrics_calculator.MetricsCalculator {
+  class_obj
+  curr_dit_class : NoneType
+  calc_cbo()
+  calc_dit(a_parent_class_object)
+  calc_lcom()
+  calc_loc()
+  calc_mpc()
+  calc_noc(project_files)
+  calc_nocc()
+  calc_nom()
+  calc_rfc()
+  calc_size2()
+  calc_wac()
+  calc_wmpc1()
+  calc_wmpc2()
+  convert_to_actual_parent_objects(class_in_question, my_parent_classes_names_only)
+  return_children(class_in_question)
+  return_max_parent_depth(my_parent_classes_objects)
+}
+class "app.src.metrics.categories.cohesion_category.CohesionCategory" as app.src.metrics.categories.cohesion_category.CohesionCategory {
+  lcom : int
+  get_lcom()
+  set_lcom(value)
+}
+class "app.src.metrics.categories.complexity_category.ComplexityCategory" as app.src.metrics.categories.complexity_category.ComplexityCategory {
+  dit : int
+  rfc : int
+  wmpc1 : float
+  wmpc2 : int
+  get_dit()
+  get_rfc()
+  get_wmpc1()
+  get_wmpc2()
+  set_dit(value)
+  set_rfc(value)
+  set_wmpc1(value)
+  set_wmpc2(value)
+}
+class "app.src.metrics.categories.coupling_category.CouplingCategory" as app.src.metrics.categories.coupling_category.CouplingCategory {
+  cbo : int
+  mpc : int
+  get_cbo()
+  get_mpc()
+  set_cbo(value)
+  set_mpc(value)
+}
+class "app.src.metrics.categories.qmood_category.QMOODCategory" as app.src.metrics.categories.qmood_category.QMOODCategory {
+  effectiveness : float
+  extendability : float
+  flexibility : float
+  functionality : float
+  reusability : float
+  understandability : float
+  get_effectiveness()
+  get_extendability()
+  get_flexibility()
+  get_functionality()
+  get_reusability()
+  get_understandability()
+  set_effectiveness(value)
+  set_extendability(value)
+  set_flexibility(value)
+  set_functionality(value)
+  set_reusability(value)
+  set_understandability(value)
+}
+class "app.src.metrics.categories.size_category.SizeCategory" as app.src.metrics.categories.size_category.SizeCategory {
+  loc : int
+  nocc : int
+  nom : int
+  size2 : int
+  wac : int
+  get_loc()
+  get_nocc()
+  get_nom()
+  get_size2()
+  get_wac()
+  set_loc(value)
+  set_nocc(value)
+  set_nom(value)
+  set_size2(value)
+  set_wac(value)
+}
+class "app.src.visitors.cc_visitor.CCNodeVisitor" as app.src.visitors.cc_visitor.CCNodeVisitor {
+  cc : int
+  class_obj
+  visit_ClassDef(node)
+  visit_For(node)
+  visit_FunctionDef(node)
+  visit_If(node)
+  visit_IfExp(node)
+  visit_Match(node)
+  visit_While(node)
+  visit_comprehension(node)
+}
+class "app.src.visitors.class_attr_visitor.ClassAttrNodeVisitor" as app.src.visitors.class_attr_visitor.ClassAttrNodeVisitor {
+  class_obj
+  visit_Name(node)
+}
+class "app.src.visitors.hierarchy_visitor.HierarchyNodeVisitor" as app.src.visitors.hierarchy_visitor.HierarchyNodeVisitor {
+  class_obj
+  parent_classes_list : list
+  visit_ClassDef(node)
+}
+class "app.src.visitors.init_visitor.InitCommonsNodeVisitor" as app.src.visitors.init_visitor.InitCommonsNodeVisitor {
+  curr_class : NoneType
+  python_file
+  visit_Attribute(node)
+  visit_ClassDef(node)
+  visit_FunctionDef(node)
+  visit_Module(node)
+}
+class "app.src.visitors.lcom_visitor.LCOMNodeVisitor" as app.src.visitors.lcom_visitor.LCOMNodeVisitor {
+  class_obj
+  fields : set
+  uses_in_method : dict
+  visit_Attribute(node)
+  visit_ClassDef(node)
+  visit_FunctionDef(node)
+}
+class "app.src.visitors.loc_counter.LOCNodeVisitor" as app.src.visitors.loc_counter.LOCNodeVisitor {
+  class_obj
+  lines_of_code : int
+  remove_empty_lines(file_full_path, class_start_line, class_last_line)
+  visit_ClassDef(node)
+}
+class "app.src.visitors.remote_methods_called_visitor.MethodsCalledNodeVisitor" as app.src.visitors.remote_methods_called_visitor.MethodsCalledNodeVisitor {
+  called : list
+  class_obj
+  validate_remote_method(method_name_called, instance_calling_name)
+  visit_Attribute(node)
+  visit_Call(node)
+  visit_ClassDef(node)
+  visit_FunctionDef(node)
+}
+app.gui.calculationsWindow.Ui_metricsWindow --* app.gui.mainWindow.Ui_MainWindow : ui
+app.gui.metricsManualWindow.Ui_Dialog --* app.gui.calculationsWindow.Ui_metricsWindow : ui
+app.gui.metricsManualWindow.Ui_Dialog --* app.gui.mainWindow.Ui_MainWindow : ui
+app.src.entities.class_entity.Class --o app.src.visitors.init_visitor.InitCommonsNodeVisitor : curr_class
+@enduml

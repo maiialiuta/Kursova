@@ -1,0 +1,93 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class node0 as "app.src.metrics.calculator.metrics_calculator.MetricsCalculator" {
+   class_obj: 
+   curr_dit_class: 
+   __init__(self, class_obj): 
+   calc_noc(project_files): 
+   calc_nom(self): 
+   calc_wmpc2(self): 
+   calc_size2(self): 
+   calc_wac(self): 
+   calc_lcom(self): 
+   calc_rfc(self): 
+   calc_nocc(self): 
+   calc_dit(self, a_parent_class_object): 
+   calc_loc(self): 
+   calc_mpc(self): 
+   calc_cbo(self): 
+   calc_wmpc1(self): 
+   return_children(self, class_in_question): 
+   convert_to_actual_parent_objects(self, class_in_question, my_parent_classes_names_only): 
+   return_max_parent_depth(self, my_parent_classes_objects): 
+}
+class node4 as "app.src.metrics.categories.cohesion_category.CohesionCategory" {
+   lcom:  
+   get_lcom(self): 
+   set_lcom(self, value): 
+}
+class node2 as "app.src.metrics.categories.complexity_category.ComplexityCategory" {
+   wmpc1: 
+   wmpc2: 
+   dit: 
+   rfc:  
+   get_dit(self): 
+   get_rfc(self): 
+   get_wmpc1(self): 
+   get_wmpc2(self): 
+   set_dit(self, value): 
+   set_rfc(self, value): 
+   set_wmpc1(self, value): 
+   set_wmpc2(self, value): 
+}
+class node3 as "app.src.metrics.categories.coupling_category.CouplingCategory" {
+   cbo: 
+   mpc:  
+   get_cbo(self): 
+   get_mpc(self): 
+   set_cbo(self, value): 
+   set_mpc(self, value): 
+}
+class node1 as "app.src.metrics.categories.qmood_category.QMOODCategory" {
+   extendability: 
+   effectiveness: 
+   flexibility: 
+   understandability: 
+   reusability: 
+   functionality:    
+   get_reusability(self): 
+   get_flexibility(self): 
+   get_understandability(self): 
+   get_functionality(self): 
+   get_extendability(self): 
+   get_effectiveness(self): 
+   set_reusability(self, value): 
+   set_flexibility(self, value): 
+   set_understandability(self, value): 
+   set_functionality(self, value): 
+   set_extendability(self, value): 
+   set_effectiveness(self, value): 
+}
+class node5 as "app.src.metrics.categories.size_category.SizeCategory" {
+   loc: 
+   nocc: 
+   size2: 
+   wac: 
+   nom:  
+   get_nocc(self): 
+   get_nom(self): 
+   get_loc(self): 
+   get_size2(self): 
+   get_wac(self): 
+   set_nocc(self, value): 
+   set_nom(self, value): 
+   set_loc(self, value): 
+   set_size2(self, value): 
+   set_wac(self, value): 
+}
+
+@enduml
